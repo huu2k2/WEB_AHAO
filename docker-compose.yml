@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  react:
+    container_name: react_app
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    networks:
+      - app-network
+    depends_on:
+      - flask
+    restart: unless-stopped
+
+  flask:
+    container_name: flask_app
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - FLASK_ENV=development
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"  # Chỉ cần mở port Nginx, các dịch vụ khác chạy nội bộ
+    depends_on:
+      - react
+      - flask
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

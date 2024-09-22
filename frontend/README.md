@@ -1,0 +1,1 @@
+- thêm component plc connect/ disconnect cho 1 plc trước.

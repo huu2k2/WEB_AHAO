@@ -1,0 +1,54 @@
+# Bước 1: Tạo môi trường ảo
+python -m venv venv
+
+# Bước 2: Kích hoạt môi trường ảo
+# Trên Windows
+venv\Scripts\activate
+# Trên macOS và Linux
+source venv/bin/activate
+
+# Bước 3: Cài đặt các gói cần thiết
+pip install Flask python-dotenv
+
+# Bước 4: Lưu trữ các phụ thuộc
+pip freeze > requirements.txt
+
+# Bước 5: Chạy ứng dụng Flask
+flask run
+# hoặc
+python app.py
+
+# Bước 6: Hủy kích hoạt môi trường ảo
+deactivate
+
+Note: sau bước 2 nếu trong requirements đã có thư viện thì bạn chỉ cần chạy lệnh sau:
+# muốn cài tất cả thư viên : pip install -r requirements.txt
+
+# Bước 7 : run dự án-> set FLASK_APP=app.py -> flask run 
+
+#flow
+nhấn nút Auto thì front end gửi: localhost:5000/PLC1/Auto
+nhấn nút Manual thì front end gửi: localhost:5000/PLC1/Manual
+nhấn nút Start của bơm 1 thì front end gửi: localhost:5000/PLC1/Pump1/On
+nhấn nút Stop của bơm 1 thì front end gửi: localhost:5000/PLC1/Pump1/Off
+nhấn nút Start của bơm 2 thì front end gửi: localhost:5000/PLC1/Pump2/On
+nhấn nút Stop của bơm 2 thì front end gửi: localhost:5000/PLC1/Pump2/Off
+
+Back end sẽ gửi thông tin liên tục với phương thức Post: localhost:5000/PLC1/Pump/Stutus kèm json:
+{
+  "PLC1":
+    {
+      "PUMP1": 1, (1 là bơm đang chạy - font end hiển thị bơm màu xanh, 0 là bơm dừng - front end hiển thị bơm màu đỏ)
+      "PUMP2": 0, (1 là bơm đang chạy - font end hiển thị bơm màu xanh, 0 là bơm dừng - front end hiển thị bơm màu đỏ)
+      "Staus": "Auto", ("Auto" thì đèn auto sáng, "Manual" Thì đèn manual, "Error" thì đèn error sáng - chỉ 1 đèn sáng các đèn còn lại tắt)
+      "Tank": 60
+    }
+}
+
+-- Mỗi cái trạng thái tín hiệu đèu có 2 roter on và emit.
+-- Gửi về riêng , gôm chung trạng thái gửi lên chung 1 lần.
+
+set: byte A bit 0 manual, 1 auto, 2 pumb_1 on, 3 pumb_1 off, 4 pumb_2 on, 5 pumb_2 off
+read: byte B bit0 maunal, bit1 auto, bit2 error, bit3 pumb_1, bit4 pump_2 (1 = ON, 0 = OFF)
+
+Nhanh trieu : git pull origin trieuquocbui
