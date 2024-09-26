@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Items = [
-  { id: 1, title: "Sidebar Item 1", isActive: true, path: "select1" },
-  { id: 2, title: "Sidebar Item 2", isActive: false, path: "select2" },
-  // { id: 3, title: "Sidebar Item 3", isActive: false, path: "select3" },
-  // { id: 4, title: "Sidebar Item 4", isActive: false, path: "select4" },
+  { id: 1, title: "Giám sát và hoạt động", isActive: true, path: "select1" },
+  { id: 2, title: "Báo cáo hoạt động", isActive: false, path: "select2" },
 ];
 
 const Drawer = () => {
@@ -13,7 +11,7 @@ const Drawer = () => {
   const navigate = useNavigate();
 
   const handeClick = (id, index) => {
-    navigate(dataItem[index].path); 
+    navigate(dataItem[index].path);
     const updatedItems = dataItem.map((item) => {
       // Tạo bản sao mới của từng đối tượng và cập nhật isActive
       return { ...item, isActive: item.id === id };

@@ -13,10 +13,7 @@ const RouterHome = {
     </LazyWrapper>
   ),
   children: [
-    {
-      path: "select1",
-      element: <Select1 />,
-    },
+    { path: "select1", element: <Select1 /> },
     { path: "select2", element: <Select2 /> },
   ],
 };

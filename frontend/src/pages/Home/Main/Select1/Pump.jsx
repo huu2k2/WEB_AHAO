@@ -7,11 +7,14 @@ export const Pump = ({
   status,
   mode,
   setPump,
+  select,
   urlSocketPumpOn,
   urlSocketPumpOff,
+  urlSocketPumpSelect,
 }) => {
   const socketPumpOn = useRef(null);
   const socketPumpOff = useRef(null);
+  const socketPumpSelect = useRef(null);
 
   useEffect(() => {
     if (!socketPumpOn.current) {
@@ -22,6 +25,11 @@ export const Pump = ({
     if (!socketPumpOff.current) {
       socketPumpOff.current = new Socket();
       socketPumpOff.current.connectWebSocket(urlSocketPumpOff);
+    }
+
+    if (!socketPumpSelect.current) {
+      socketPumpSelect.current = new Socket();
+      socketPumpSelect.current.connectWebSocket(urlSocketPumpSelect);
     }
 
     return () => {
@@ -38,15 +46,18 @@ export const Pump = ({
     if (action === "on") {
       setPump(true);
       socketPumpOn.current.sendMessage(`pump ${index + 1} on`);
-
       socketPumpOn.current.getMessage((receivedData) => {
         console.log(receivedData);
       });
-    } else {
+    } else if (action == "off") {
       setPump(false);
       socketPumpOff.current.sendMessage(`pump ${index + 1} off`);
-
       socketPumpOff.current.getMessage((receivedData) => {
+        console.log(receivedData);
+      });
+    } else {
+      socketPumpSelect.current.sendMessage(`pump ${index + 1} select`);
+      socketPumpSelect.current.getMessage((receivedData) => {
         console.log(receivedData);
       });
     }
@@ -63,17 +74,24 @@ export const Pump = ({
       <div className="flex space-x-2">
         <button
           className="btn btn-success"
-          disabled={mode === "AUTO"}
+          disabled={mode === "AUTO" ? true : mode === "MANUAL" ? false : true}
           onClick={() => handlePump("on")}
         >
           START
         </button>
         <button
           className="btn btn-error"
-          disabled={mode === "AUTO"}
+          disabled={mode === "AUTO" ? true : mode === "MANUAL" ? false : true}
           onClick={() => handlePump("off")}
         >
           STOP
+        </button>
+        <button
+          className="btn btn-success"
+          disabled={select == true || select == null}
+          onClick={() => handlePump("select")}
+        >
+          Select
         </button>
       </div>
     </div>

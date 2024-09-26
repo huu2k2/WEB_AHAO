@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import Socket from "../../../../ws";
-import ROUTES from "../../../../ws/routers/index"
+import ROUTES from "../../../../ws/routers/index";
 
-export const InputComponent = () => {
+export const InputComponent = ({ status }) => {
   const [getText, setText] = useState("");
   const [data, setData] = useState(null);
   const socketInput = useRef(null);
@@ -46,15 +46,19 @@ export const InputComponent = () => {
         onKeyDown={handleEnter}
       />
 
-      {data && (
+      {status != null && getText != "" && (
         <div
           className={`text-sm font-medium p-2 rounded-md ${
-            data.Status === 1
+            status === true
               ? "bg-green-100 text-green-600"
               : "bg-red-100 text-red-600"
           }`}
         >
-          {data.Message}
+          {status === true
+            ? "PLC kết nối thành công"
+            : status === false
+            ? "PLC kết nối thất bại"
+            : ""}
         </div>
       )}
     </div>
