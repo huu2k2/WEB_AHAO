@@ -46,6 +46,7 @@ const index = () => {
 
     socketMainPLC1.current.getMessage((receivedData) => {
       const data = JSON.parse(receivedData);
+      console.log(data);
       setWaterLevel(data.PLC1?.Tank);
       setPump1Status(data.PLC1?.PUMP1);
       setPump2Status(data.PLC1?.PUMP2);

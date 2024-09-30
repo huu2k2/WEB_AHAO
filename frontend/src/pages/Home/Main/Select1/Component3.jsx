@@ -4,40 +4,40 @@ import image from "../../../../assets/image.png";
 export const Component3 = ({ waterLevel }) => {
   return (
     <div className="flex flex-col items-center border border-dashed border-gray-500 p-10 rounded-lg w-[28%] h-full">
-      <div
-        className="relative w-32 h-64 bg-gray-400 rounded-md overflow-hidden"
-        style={{
-          backgroundImage: `url(${image})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          height: "100%",
-          width: "100%",
-        }}
-      >
+      <div className="relative w-full h-full flex justify-center items-center bg-gray-400 rounded-md overflow-hidden">
         <div
-          className="absolute bottom-0"
+          className="relative w-full h-full"
           style={{
-            height: "86%",
-            width: "50px",
-            left: "60%",
-            bottom: "8px",
-            transform: "translateX(-50%)",
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundImage: `url(${image})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "100% 100%",
+            backgroundPosition: "center",
           }}
         >
           <div
-            className="bg-blue-300"
+            className="absolute bottom-0"
             style={{
-              height: `${waterLevel}%`,
-              width: "100%",
-              bottom: 0,
-              position: "absolute",
+              height: "86%",
+              width: "10%",
+              left: "60%",
+              bottom: "2%",
+              transform: "translateX(-50%)",
+              backgroundColor: "rgba(0, 0, 0, 0.5)",
             }}
-          ></div>
+          >
+            <div
+              className="bg-blue-300"
+              style={{
+                height: `${waterLevel}%`,
+                width: "100%",
+                bottom: 0,
+                position: "absolute",
+              }}
+            ></div>
+          </div>
         </div>
       </div>
-      <p className="mt-2 font-bold">Bể nước {waterLevel}</p>
+      <p className="mt-2 font-bold">Bể nước {waterLevel}%</p>
     </div>
   );
 };
