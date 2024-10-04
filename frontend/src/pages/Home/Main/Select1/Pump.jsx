@@ -3,6 +3,7 @@ import imgbumperr from "@assets/bumperr.png";
 import { useRef, useEffect } from "react";
 import Socket from "../../../../ws";
 export const Pump = ({
+  name,
   index,
   status,
   mode,
@@ -64,6 +65,7 @@ export const Pump = ({
   };
   return (
     <div className="flex flex-col items-center space-y-4 flex-1">
+      <h1 className="items-center"> {name}</h1>
       <div className="w-60 h-60 border flex items-center justify-center object-cover">
         <img
           src={status ? imgbumperr : imgbump}
@@ -88,7 +90,7 @@ export const Pump = ({
         </button>
         <button
           className="btn btn-success"
-          disabled={select == true || select == null}
+          disabled={select == false || select == null}
           onClick={() => handlePump("select")}
         >
           Select

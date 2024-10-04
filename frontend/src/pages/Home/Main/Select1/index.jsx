@@ -19,7 +19,7 @@ const index = () => {
 
   const Pumps = [
     {
-      name: "pump1",
+      name: "BƠM 1",
       status: pump1Status,
       setPump: setPump1Status,
       urlSocketPumpOn: ROUTES.PUMP_1_ON,
@@ -27,7 +27,7 @@ const index = () => {
       urlSocketPumpSelect: ROUTES.PUMP_1_SELECT,
     },
     {
-      name: "pump2",
+      name: "BƠM 2",
       status: pump2Status,
       setPump: setPump2Status,
       urlSocketPumpOn: ROUTES.PUMP_2_ON,
@@ -46,7 +46,6 @@ const index = () => {
 
     socketMainPLC1.current.getMessage((receivedData) => {
       const data = JSON.parse(receivedData);
-      console.log(data);
       setWaterLevel(data.PLC1?.Tank);
       setPump1Status(data.PLC1?.PUMP1);
       setPump2Status(data.PLC1?.PUMP2);
@@ -78,6 +77,7 @@ const index = () => {
             <Pump
               key={index}
               index={index}
+              name={i.name}
               status={i.status}
               mode={mode}
               setPump={i.setPump}

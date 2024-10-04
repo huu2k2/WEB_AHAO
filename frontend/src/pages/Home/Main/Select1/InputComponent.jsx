@@ -3,7 +3,10 @@ import Socket from "../../../../ws";
 import ROUTES from "../../../../ws/routers/index";
 
 export const InputComponent = ({ status }) => {
-  const [getText, setText] = useState("");
+  const [getText, setText] = useState(() => {
+    const savedData = localStorage.getItem("ip");
+    return savedData ? savedData : "";
+  });
   const [data, setData] = useState(null);
   const socketInput = useRef(null);
 
@@ -31,6 +34,7 @@ export const InputComponent = ({ status }) => {
   const handleEnter = (e) => {
     if (e.key === "Enter") {
       socketInput.current.sendMessage(getText);
+      localStorage.setItem("ip", getText);
     }
   };
 
@@ -45,7 +49,6 @@ export const InputComponent = ({ status }) => {
         onChange={handleChangeValue}
         onKeyDown={handleEnter}
       />
-
       {status != null && getText != "" && (
         <div
           className={`text-sm font-medium p-2 rounded-md ${

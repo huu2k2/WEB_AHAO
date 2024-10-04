@@ -45,4 +45,4 @@ def plc_pump_status(sock, plc_instance):
                         }
                     } 
             ws.send(json.dumps(data))
-            time.sleep(0.5)    
+            time.sleep(1)

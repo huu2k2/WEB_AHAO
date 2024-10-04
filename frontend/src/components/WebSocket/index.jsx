@@ -1,9 +1,10 @@
-import React from 'react';
-import useWebSocket from '../../ws';
-
+import React from "react";
+import useWebSocket from "../../ws";
 
 const WebSocketComponent = () => {
-  const { messages, sendMessage } = useWebSocket('ws://localhost:5000/PLC1/Auto');
+  const { messages, sendMessage } = useWebSocket(
+    "ws://localhost:5000/PLC1/Auto"
+  );
 
   return (
     <div>
@@ -12,9 +13,7 @@ const WebSocketComponent = () => {
         {messages.length === 0 ? (
           <p>No messages yet</p>
         ) : (
-          messages.map((msg, index) => (
-            <p key={index}>{msg}</p>
-          ))
+          messages.map((msg, index) => <p key={index}>{msg}</p>)
         )}
       </div>
       <button onClick={() => sendMessage("Manual Ping from client")}>

@@ -4,6 +4,7 @@ from .plc1_status import plc_pump_status
 from .plc1_auto import plc1_auto
 from .plc1_pump_1 import plc1_pump1Off, plc1_pump1On, plc1_pump1Select
 from .plc1_pump_2 import plc1_pump2On, plc1_pump2Off, plc1_pump2Select
+from .statistics import statistics 
 from ..device import newPLC
 
 plc_instance = newPLC()
@@ -19,3 +20,4 @@ def runsocket(sock):
     plc1_pump2Select(sock, plc_instance)
     plc_pump_status(sock, plc_instance)
     pcl1_search_ip(sock, plc_instance)
+    statistics(sock)

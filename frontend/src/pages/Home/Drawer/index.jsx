@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Items = [
-  { id: 1, title: "Giám sát và hoạt động", isActive: true, path: "select1" },
+  { id: 1, title: "Giám sát và điều khiển", isActive: true, path: "select1" },
   { id: 2, title: "Báo cáo hoạt động", isActive: false, path: "select2" },
 ];
 
@@ -13,7 +13,6 @@ const Drawer = () => {
   const handeClick = (id, index) => {
     navigate(dataItem[index].path);
     const updatedItems = dataItem.map((item) => {
-      // Tạo bản sao mới của từng đối tượng và cập nhật isActive
       return { ...item, isActive: item.id === id };
     });
 
@@ -24,13 +23,13 @@ const Drawer = () => {
     <div className="drawer lg:drawer-open w-80">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
 
-      <div className="drawer-side">
+      <div className="drawer-side bg-[#08D7EB]">
         <label
           htmlFor="my-drawer-2"
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu min-h-full w-80 p-4 bg-[#1D232A] text-white">
+        <ul className="menu min-h-full w-80 p-4 bg-[#08D7EB] text-white">
           {dataItem.map((i, index) => (
             <li
               key={index}

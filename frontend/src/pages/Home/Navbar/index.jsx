@@ -2,10 +2,10 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-[#1D232A] px-10 border-b-2 border-black">
+    <div className="navbar bg-[#08D7EB] px-10 border-b-2 border-black">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl text-white">
-          Trạm Bom 1 Trường ĐH Sư Phạm{" "}
+          Trạm Bơm 1 Trường ĐH Sư Phạm{" "}
         </a>
       </div>
       <div className="flex-none gap-2">
@@ -27,10 +27,10 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a href="/login">Settings</a>
+              <a>Thiết lặp</a>
             </li>
             <li>
-              <a>Logout</a>
+              <a href="/login">Đăng xuất</a>
             </li>
           </ul>
         </div>

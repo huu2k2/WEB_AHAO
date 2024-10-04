@@ -9,6 +9,7 @@ const ROUTES = {
     PUMP_2_OFF: `ws://${window.location.host}:5000/PLC1/Pump2/Off`,
     PUMP_2_SELECT: `ws://${window.location.host}:5000/PLC1/Pump2/Select`,
     PCL1_STATUS: `ws://${window.location.host}:5000/PLC1/Pump/Stutus`,
+    STATISTICS: `ws://${window.location.host}:5000/Statistics`,
 };
 
 export default ROUTES;
