@@ -1,4 +1,5 @@
 const ROUTES = {
+    IP:"",
     AUTO: `ws://${window.location.host}:5000/PLC1/Auto`,
     MANUAL: `ws://${window.location.host}:5000/PLC1/Manual`,
     SEARCH_IP: `ws://${window.location.host}:5000/PLC1/SearchIP`,

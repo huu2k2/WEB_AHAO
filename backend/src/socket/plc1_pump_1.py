@@ -29,3 +29,4 @@ def plc1_pump1Select(sock,plc_instance):
             if plc_instance.isconnect:
                 A = 0
                 plc_instance.writeBool(8,A,6,1)
+                plc_instance.writeBool(8,A,7,0)

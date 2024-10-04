@@ -17,6 +17,8 @@ export const Pump = ({
   const socketPumpOff = useRef(null);
   const socketPumpSelect = useRef(null);
 
+  console.log(select);
+
   useEffect(() => {
     if (!socketPumpOn.current) {
       socketPumpOn.current = new Socket();
@@ -89,8 +91,8 @@ export const Pump = ({
           STOP
         </button>
         <button
-          className="btn btn-success"
-          disabled={select == false || select == null}
+          className={`btn ${select && 'btn-info'}`}
+          // ={!select}
           onClick={() => handlePump("select")}
         >
           Select
