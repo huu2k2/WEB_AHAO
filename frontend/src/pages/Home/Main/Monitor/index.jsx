@@ -13,7 +13,6 @@ import ROUTES from "../../../../ws/routers";
 const index = () => {
   const [data, setData] = useState({
     Conn: null,
-    Mode: null,
     Status: null,
     Current: null,
     Voltage: null,

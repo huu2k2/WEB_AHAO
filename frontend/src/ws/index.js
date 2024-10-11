@@ -8,7 +8,7 @@ export default class Socket {
     connectWebSocket = (url) => {
         const newSocket = new WebSocket(url);
         newSocket.onopen = () => {
-            console.log(`WebSocket connection opened for ${url}`);
+            // console.log(`WebSocket connection opened for ${url}`);
         };
         this.socket = newSocket
     }
