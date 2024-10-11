@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Items = [
-  { id: 1, title: "Giám sát và điều khiển", isActive: true, path: "select1" },
-  { id: 2, title: "Báo cáo hoạt động", isActive: false, path: "select2" },
+  { id: 1, title: "Giám sát và điều khiển", isActive: true, path: "monitor" },
+  { id: 2, title: "Báo cáo hoạt động", isActive: false, path: "report" },
+  { id: 3, title: "Lịch sử báo động", isActive: false, path: "history" },
 ];
 
 const Drawer = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../../../../components/Button";
 
-export const Component2 = ({ activeButton }) => {
+export const Alert = ({ activeButton }) => {
   const Buttons = [
     { title: "AUTO", handleButton: () => {} },
     { title: "MANUAL", handleButton: () => {} },
@@ -9,7 +9,7 @@ export const Component2 = ({ activeButton }) => {
   ];
 
   return (
-    <div className="flex space-x-4 border border-dashed border-gray-500 p-10 rounded-lg">
+    <div className="flex space-x-4 bg-white shadow-md rounded-lg p-10">
       <button
         className={`btn rounded-full w-20 h-20 ${
           activeButton === "AUTO" ? "btn-success" : "btn-outline"

@@ -2,8 +2,9 @@ import { lazy } from "react";
 import LazyWrapper from "@components/LazyLoad";
 
 const Page = lazy(() => import("./index"));
-const Select1 = lazy(() => import("./Main/Select1"));
-const Select2 = lazy(() => import("./Main/Select2"));
+const Monitor = lazy(() => import("./Main/Monitor"));
+const Report = lazy(() => import("./Main/Report"));
+const History = lazy(() => import("./Main/History"));
 
 const RouterHome = {
   path: "/",
@@ -13,8 +14,9 @@ const RouterHome = {
     </LazyWrapper>
   ),
   children: [
-    { path: "select1", element: <Select1 /> },
-    { path: "select2", element: <Select2 /> },
+    { path: "monitor", element: <Monitor /> },
+    { path: "report", element: <Report /> },
+    { path: "history", element: <History /> },
   ],
 };
 

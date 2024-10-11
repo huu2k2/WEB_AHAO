@@ -5,10 +5,9 @@ import Socket from "../../../../ws";
 export const Pump = ({
   name,
   index,
-  status,
   mode,
-  setPump,
   select,
+  status,
   urlSocketPumpOn,
   urlSocketPumpOff,
   urlSocketPumpSelect,
@@ -16,8 +15,6 @@ export const Pump = ({
   const socketPumpOn = useRef(null);
   const socketPumpOff = useRef(null);
   const socketPumpSelect = useRef(null);
-
-  console.log(select);
 
   useEffect(() => {
     if (!socketPumpOn.current) {
@@ -47,13 +44,11 @@ export const Pump = ({
 
   const handlePump = (action) => {
     if (action === "on") {
-      setPump(true);
       socketPumpOn.current.sendMessage(`pump ${index + 1} on`);
       socketPumpOn.current.getMessage((receivedData) => {
         console.log(receivedData);
       });
     } else if (action == "off") {
-      setPump(false);
       socketPumpOff.current.sendMessage(`pump ${index + 1} off`);
       socketPumpOff.current.getMessage((receivedData) => {
         console.log(receivedData);
@@ -81,21 +76,20 @@ export const Pump = ({
           disabled={mode === "AUTO" ? true : mode === "MANUAL" ? false : true}
           onClick={() => handlePump("on")}
         >
-          START
+          Chạy
         </button>
         <button
           className="btn btn-error"
           disabled={mode === "AUTO" ? true : mode === "MANUAL" ? false : true}
           onClick={() => handlePump("off")}
         >
-          STOP
+          Dừng
         </button>
         <button
-          className={`btn ${select && 'btn-info'}`}
-          // ={!select}
+          className={`btn ${select && "btn-info"}`}
           onClick={() => handlePump("select")}
         >
-          Select
+          Chọn
         </button>
       </div>
     </div>

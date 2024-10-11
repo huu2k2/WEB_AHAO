@@ -1,9 +1,9 @@
 import React from "react";
 import image from "../../../../assets/image.png";
 
-export const Component3 = ({ waterLevel }) => {
+export const Tank = ({ waterLevel }) => {
   return (
-    <div className="flex flex-col items-center border border-dashed border-gray-500 p-10 rounded-lg w-[28%] h-full">
+    <div className="flex flex-col items-center bg-white shadow-md rounded-lg p-10 w-[28%] h-full">
       <div className="relative w-full h-full flex justify-center items-center bg-gray-400 rounded-md overflow-hidden">
         <div
           className="relative w-full h-full"

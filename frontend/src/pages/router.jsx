@@ -5,7 +5,7 @@ import RouterPageLogin from "./Login/router";
 import Page_Login from "./Login";
 
 export const routers = createBrowserRouter([
-  { path: "/", element: <Page_Login /> },
+  { path: "/login", element: <Page_Login /> },
   RouterPage404,
   RouterPageLogin,
   RouterHome,

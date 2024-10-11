@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import Socket from "../../../../ws";
 import ROUTES from "../../../../ws/routers/index";
 
-export const InputComponent = ({ status }) => {
+export const ConnStatus = ({ status }) => {
   const [getText, setText] = useState(() => {
     const savedData = localStorage.getItem("ip");
     return savedData ? savedData : "";
@@ -31,30 +31,8 @@ export const InputComponent = ({ status }) => {
     };
   }, []);
 
-  
-
-  // const handleChangeValue = (e) => {
-  //   setText(e.target.value);
-  // };
-
-  // const handleEnter = (e) => {
-  //   if (e.key === "Enter") {
-  //     socketInput.current.sendMessage(window.location.host);
-  //   }
-  // };
-
   return (
     <div className="flex flex-col space-y-2">
-      {/* <input
-        id="ip-input"
-        type="text"
-        value={getText}
-        placeholder="Nhập IP máy..."
-        className="input input-bordered input-accent w-full max-w-xs"
-        onChange={handleChangeValue}
-        onKeyDown={handleEnter}
-      /> */}
-
       <div
         className={`text-sm font-medium p-2 rounded-md ${
           status === true

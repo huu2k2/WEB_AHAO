@@ -10,7 +10,7 @@ const Page_Login = () => {
     e.preventDefault();
     if (email === "admin") {
       if (password == "admin") {
-        navigate("/select1");
+        navigate("/monitor");
       }
     }
   };

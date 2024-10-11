@@ -3,7 +3,7 @@ import Socket from "../../../../ws";
 import ROUTES from "../../../../ws/routers/index";
 import Button from "../../../../components/Button";
 
-export const Component1 = ({ mode, setMode }) => {
+export const StatusControl = ({ mode }) => {
   const socketAuto = useRef(null);
   const socketManual = useRef(null);
 
@@ -38,14 +38,12 @@ export const Component1 = ({ mode, setMode }) => {
   }, []);
 
   const handleManual = () => {
-    setMode("MANUAL");
     if (socketManual.current) {
       socketManual.current.sendMessage("MANUAL");
     }
   };
 
   const handleAuto = () => {
-    setMode("AUTO");
     if (socketAuto.current) {
       socketAuto.current.sendMessage("AUTO");
     }
@@ -57,7 +55,7 @@ export const Component1 = ({ mode, setMode }) => {
   ];
 
   return (
-    <div className="flex space-x-4 border border-dashed border-gray-500 p-10 rounded-lg">
+    <div className="flex space-x-4  bg-white shadow-md rounded-lg p-10">
       {Buttons.map((item, index) => (
         <Button
           key={index}

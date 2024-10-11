@@ -15,6 +15,12 @@ def plc_pump_status(sock, plc_instance):
             statusPump2 = None
             select1 = None
             select2 = None
+            pow = 455
+            vol = 220
+            amp = 22.0
+            flow = 40
+            tpump1 = 1500
+            tpump2 = 2500
             conn = plc_instance.isconnect
             if conn:
                 statusManual = plc_instance.readBool(8,B,0)
@@ -24,6 +30,12 @@ def plc_pump_status(sock, plc_instance):
                 statusPump2 = plc_instance.readBool(8,B,4)
                 select1 = plc_instance.readBool(8,B,5)
                 select2 = plc_instance.readBool(8,B,6)
+                pow = 455
+                vol = 220
+                amp = 22.0
+                flow = 40
+                tpump1 = 1500
+                tpump2 = 2500
                 if statusAuto:
                     status = "AUTO"
                 elif statusManual:
@@ -42,6 +54,12 @@ def plc_pump_status(sock, plc_instance):
                             "Conn": conn,
                             "Select_1": select1,
                             "Select_2": select2,
+                            "Power": pow,
+                            "Voltage": vol,
+                            "Current": amp,
+                            "Flow": flow,
+                            "Tpump1": tpump1,
+                            "Tpump2": tpump2,
                         }
                     } 
             ws.send(json.dumps(data))
