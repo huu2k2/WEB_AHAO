@@ -52,3 +52,9 @@ set: byte A bit 0 manual, 1 auto, 2 pumb_1 on, 3 pumb_1 off, 4 pumb_2 on, 5 pumb
 read: byte B bit0 maunal, bit1 auto, bit2 error, bit3 pumb_1, bit4 pump_2 (1 = ON, 0 = OFF)
 
 Nhanh trieu : git pull origin trieuquocbui
+
+Database:
+user(username, password, role_id)
+role(id, name, description)
+device(id, name, ip_address, lib_name, config, location, tag_input, tag_output, tag_value)
+report (id, name, device_id, time, sampling_time, tag_value, description)
