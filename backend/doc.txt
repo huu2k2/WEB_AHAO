@@ -24,7 +24,18 @@ deactivate
 Note: sau bước 2 nếu trong requirements đã có thư viện thì bạn chỉ cần chạy lệnh sau:
 # muốn cài tất cả thư viên : pip install -r requirements.txt
 
-# Bước 7 : run dự án-> set FLASK_APP=app.py -> flask run 
+# Bước 7 : run dự án-> set FLASK_APP=app.py -> flask --app app.py --debug run
+
+
+# Khởi tạo migrations
+flask db init
+
+# Tạo một migration mới
+flask db migrate -m "Initial migration"
+
+# Áp dụng migration
+flask db upgrade
+
 
 #flow
 nhấn nút Auto thì front end gửi: localhost:5000/PLC1/Auto
