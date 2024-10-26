@@ -5,6 +5,9 @@ const Items = [
   { id: 1, title: "Giám sát và điều khiển", isActive: true, path: "monitor" },
   { id: 2, title: "Báo cáo hoạt động", isActive: false, path: "report" },
   { id: 3, title: "Lịch sử báo động", isActive: false, path: "history" },
+  { id: 4, title: "Quản lí thiết bị", isActive: false, path: "device" },
+  { id: 5, title: "Quản lí vai trò", isActive: false, path: "role" },
+  { id: 6, title: "Quản lí tài khoản", isActive: false, path: "account" },
 ];
 
 const Drawer = () => {
