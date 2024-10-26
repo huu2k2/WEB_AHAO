@@ -1,9 +1,12 @@
 from flask import Flask
-from .module.hello import main_routes
 from .models import db, User, Role, Device, Report
 from flask_migrate import Migrate # type: ignore
+import flask_admin 
+from flask_admin.contrib.sqla import ModelView
 import pymysql
 pymysql.install_as_MySQLdb()
+from .module import api
+
 
 def create_app():
     app = Flask(__name__)
@@ -14,6 +17,12 @@ def create_app():
     db.init_app(app)
     Migrate(app, db)
 
+    admin = flask_admin.Admin(app, name='PLC', template_mode='bootstrap4')
+    admin.add_view(ModelView(User, db.session))
+    admin.add_view(ModelView(Role, db.session))
+    admin.add_view(ModelView(Device, db.session))
+    admin.add_view(ModelView(Report, db.session))
     # Import routes vào
-    app.register_blueprint(main_routes, url_prefix='/api/v1')
+    app.register_blueprint(api, url_prefix='/api/v1')
+
     return app
