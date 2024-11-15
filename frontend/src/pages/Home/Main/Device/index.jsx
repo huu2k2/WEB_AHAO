@@ -27,6 +27,7 @@ const Index = () => {
       tag_value: "Value B",
     },
   ];
+  const [isUpdate, setIsUpdate] = useState(false);
   const [detailData, setDetailData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -52,8 +53,10 @@ const Index = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleEdit = (id) => {
-    console.log("Edit item:", id);
+  const handleEdit = (data) => {
+    setFormData(data);
+    setIsUpdate(true);
+    setShowModal(true);
   };
 
   const handleDelete = (id) => {
@@ -63,6 +66,7 @@ const Index = () => {
 
   const handleAddNew = () => {
     setShowModal(true);
+    isUpdate(false);
   };
 
   const handleShowDetail = (id) => {
@@ -72,6 +76,7 @@ const Index = () => {
   };
 
   const confirmDelete = () => {
+    // call api
     console.log("Delete confirmed:", itemToDelete);
     setShowDeleteConfirm(false);
     setItemToDelete(null);
@@ -116,6 +121,7 @@ const Index = () => {
       {/* Modal */}
       {showModal && (
         <Form
+          isUpdate={isUpdate}
           handleCloseModal={handleCloseModal}
           formData={formData}
           setFormData={setFormData}
@@ -177,7 +183,7 @@ const Index = () => {
                     <FaInfoCircle />
                   </button>
                   <button
-                    onClick={() => handleEdit(item.id)}
+                    onClick={() => handleEdit(item)}
                     className="text-yellow-500 hover:text-yellow-600 ml-2"
                     title="Chỉnh sửa"
                   >

@@ -16,6 +16,8 @@ const Index = () => {
     },
   ];
 
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({
@@ -31,16 +33,20 @@ const Index = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleEdit = (id) => {
-    console.log("Edit item:", id);
+  const handleEdit = (data) => {
+    setFormData(data);
+    setIsUpdate(true);
+    setShowModal(true);
   };
 
   const handleDelete = (id) => {
-    console.log("Delete item:", id);
+    setShowDeleteConfirm(true);
+    console.log(id);
   };
 
   const handleAddNew = () => {
     setShowModal(true);
+    setIsUpdate(false);
   };
 
   const handleCloseModal = () => {
@@ -49,6 +55,15 @@ const Index = () => {
       name: "",
       description: "",
     });
+  };
+
+  const confirmDelete = () => {
+    console.log("Delete confirmed:", itemToDelete);
+    setShowDeleteConfirm(false);
+  };
+
+  const cancelDelete = () => {
+    setShowDeleteConfirm(false);
   };
 
   return (
@@ -66,10 +81,34 @@ const Index = () => {
       {/* Modal */}
       {showModal && (
         <Form
+          isUpdate={isUpdate}
           handleCloseModal={handleCloseModal}
           formData={formData}
           setFormData={setFormData}
         />
+      )}
+
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg w-1/3">
+            <h2 className="text-xl font-semibold mb-4">Xác nhận xóa</h2>
+            <p>Bạn có chắc chắn muốn xóa vai trò này không?</p>
+            <div className="flex justify-end mt-4">
+              <button
+                onClick={cancelDelete}
+                className="bg-gray-300 text-black px-4 py-2 rounded-md mr-2 hover:bg-gray-400"
+              >
+                Hủy
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+              >
+                Xác nhận
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       <div className="overflow-x-auto">
@@ -92,7 +131,7 @@ const Index = () => {
                 </td>
                 <td className="py-2 px-4 border-b">
                   <button
-                    onClick={() => handleEdit(item.id)}
+                    onClick={() => handleEdit(item)}
                     className="text-yellow-500 hover:text-yellow-600 ml-2"
                     title="Chỉnh sửa"
                   >

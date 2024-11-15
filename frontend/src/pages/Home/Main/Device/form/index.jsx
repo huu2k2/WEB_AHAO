@@ -1,9 +1,14 @@
 import React from "react";
 
-const Index = ({ handleCloseModal, formData, setFormData }) => {
+const Index = ({ isUpdate, handleCloseModal, formData, setFormData }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    if (isUpdate) {
+      // call api
+    } else {
+      // call api
+    }
+
     handleCloseModal();
   };
 
@@ -19,7 +24,10 @@ const Index = ({ handleCloseModal, formData, setFormData }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg shadow-2xl w-full max-w-lg">
         <h3 className="text-xl font-bold mb-6 text-gray-800">
-          Mẫu thêm thiết bị mới
+          Biểu mẫu{" "}
+          {isUpdate
+            ? "chỉnh sửa thông tin thiết bị"
+            : "thêm thông tin thiết bị"}
         </h3>
         <form onSubmit={handleFormSubmit}>
           <div className="grid grid-cols-2 gap-4">
