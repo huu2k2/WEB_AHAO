@@ -1,0 +1,2 @@
+UPLOAD_FOLDER = 'uploads'
+ALLOWED_EXTENSIONS = {'mp3','mp4'}

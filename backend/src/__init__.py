@@ -1,4 +1,7 @@
+import os
 from flask import Flask
+
+from .module.upload_file import create_upload_routes
 from .models import db, User, Role, Device, Report
 from flask_migrate import Migrate # type: ignore
 import flask_admin 
@@ -14,6 +17,7 @@ def create_app():
     app.config["SECRET_KEY"] = "secret"
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:123456@localhost/plc'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'uploads')
     db.init_app(app)
     Migrate(app, db)
 
@@ -24,5 +28,6 @@ def create_app():
     admin.add_view(ModelView(Report, db.session))
     # Import routes vào
     app.register_blueprint(api, url_prefix='/api/v1')
+    create_upload_routes(app)  
 
     return app
