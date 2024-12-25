@@ -8,7 +8,7 @@ const Statistics = ({ title, value, color }) => {
     datasets: [
       {
         label: title,
-        data: [], // Khởi tạo mảng dữ liệu trống
+        data: [], 
         borderColor: color,
         backgroundColor: "transparent",
         borderWidth: 2,

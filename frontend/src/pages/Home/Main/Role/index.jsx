@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
 import Form from "./form";
+import { Edit, Trash } from "lucide-react";
 
 const Index = () => {
   const data = [
@@ -130,20 +131,26 @@ const Index = () => {
                   {item.description}
                 </td>
                 <td className="py-2 px-4 border-b">
-                  <button
-                    onClick={() => handleEdit(item)}
-                    className="text-yellow-500 hover:text-yellow-600 ml-2"
-                    title="Chỉnh sửa"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="text-red-500 hover:text-red-600 ml-2"
-                    title="Xoá"
-                  >
-                    <FaTrash />
-                  </button>
+                  <div className="flex space-x-2">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEdit(item);
+                      }}
+                      className="bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600 flex items-center"
+                    >
+                      <Edit className="w-3 h-3 mr-1" /> Sửa
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(item.id);
+                      }}
+                      className="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600 flex items-center"
+                    >
+                      <Trash className="w-3 h-3 mr-1" /> Xóa
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}

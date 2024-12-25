@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FaEdit, FaTrash, FaPlus, FaInfoCircle } from "react-icons/fa";
+import { Plus, ChevronDown, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import Form from "./form";
-import Details from "./details";
+
 const Index = () => {
   const data = [
     {
@@ -27,13 +27,14 @@ const Index = () => {
       tag_value: "Value B",
     },
   ];
+
   const [isUpdate, setIsUpdate] = useState(false);
-  const [detailData, setDetailData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
+  const [expandedRow, setExpandedRow] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
     ip_address: "",
@@ -51,6 +52,10 @@ const Index = () => {
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
+  const handleRowClick = (id) => {
+    setExpandedRow(expandedRow === id ? null : id);
+  };
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleEdit = (data) => {
@@ -66,17 +71,10 @@ const Index = () => {
 
   const handleAddNew = () => {
     setShowModal(true);
-    isUpdate(false);
-  };
-
-  const handleShowDetail = (id) => {
-    const detail = data.find((item) => item.id === id);
-    setDetailData(detail);
-    setShowDetailModal(true);
+    setIsUpdate(false);
   };
 
   const confirmDelete = () => {
-    // call api
     console.log("Delete confirmed:", itemToDelete);
     setShowDeleteConfirm(false);
     setItemToDelete(null);
@@ -110,15 +108,23 @@ const Index = () => {
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-semibold">Danh sách thiết bị</h2>
-        <button
-          onClick={handleAddNew}
-          className="bg-green-500 text-white px-4 py-2 rounded-md flex items-center hover:bg-green-600"
-        >
-          <FaPlus className="mr-2" /> Thêm mới
-        </button>
+        <div className="flex space-x-4 items-center">
+          <input
+            type="text"
+            placeholder="Tìm kiếm..."
+            value={""}
+            onChange={() => {}}
+            className="border border-gray-300 rounded-md px-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-green-500"
+          />
+          <button
+            onClick={handleAddNew}
+            className="bg-green-500 text-white px-4 py-2 rounded-md flex items-center hover:bg-green-600"
+          >
+            <Plus className="w-4 h-4 mr-2" /> Thêm mới
+          </button>
+        </div>
       </div>
 
-      {/* Modal */}
       {showModal && (
         <Form
           isUpdate={isUpdate}
@@ -136,7 +142,7 @@ const Index = () => {
       )}
 
       {showDeleteConfirm && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white p-6 rounded-lg w-1/3">
             <h2 className="text-xl font-semibold mb-4">Xác nhận xóa</h2>
             <p>Bạn có chắc chắn muốn xóa thiết bị này không?</p>
@@ -162,48 +168,98 @@ const Index = () => {
         <table className="min-w-full table-auto bg-white shadow-md rounded-lg">
           <thead className="bg-gray-100">
             <tr>
-              <th className="w-[20%] py-3 px-4 border-b text-left">Mã</th>
-              <th className="w-[25%] py-3 px-4 border-b text-left">Tên</th>
-              <th className="w-[45%] py-3 px-4 border-b text-left">Vị trí</th>
-              <th className="w-[10%] py-3 px-4 border-b text-left">Thao tác</th>
+              <th className="w-[5%] py-3 px-4 border-b"></th>
+              <th className="w-[19%] py-3 px-4 border-b text-left">Mã</th>
+              <th className="w-[19%] py-3 px-4 border-b text-left">Tên</th>
+              <th className="w-[19%] py-3 px-4 border-b text-left">
+                Địa chỉ IP
+              </th>
+              <th className="w-[19%] py-3 px-4 border-b text-left">Cấu hình</th>
+              <th className="w-[19%] py-3 px-4 border-b text-left">Vị trí</th>
             </tr>
           </thead>
           <tbody className="min-h-[200px]">
             {currentItems.map((item) => (
-              <tr key={item.id}>
-                <td className="py-2 px-4 border-b">{item.id}</td>
-                <td className="py-2 px-4 border-b truncate">{item.name}</td>
-                <td className="py-2 px-4 border-b truncate">{item.location}</td>
-                <td className="py-2 px-4 border-b">
-                  <button
-                    onClick={() => handleShowDetail(item.id)}
-                    className="text-blue-500 hover:text-blue-600"
-                    title="Chi tiết"
-                  >
-                    <FaInfoCircle />
-                  </button>
-                  <button
-                    onClick={() => handleEdit(item)}
-                    className="text-yellow-500 hover:text-yellow-600 ml-2"
-                    title="Chỉnh sửa"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    className="text-red-500 hover:text-red-600 ml-2"
-                    title="Xoá"
-                  >
-                    <FaTrash />
-                  </button>
-                </td>
-              </tr>
+              <React.Fragment key={item.id}>
+                <tr
+                  className="hover:bg-gray-50 cursor-pointer transition-colors"
+                  onClick={() => handleRowClick(item.id)}
+                >
+                  <td className="py-2 px-4 border-b text-center">
+                    {expandedRow === item.id ? (
+                      <ChevronDown className="inline-block w-4 h-4" />
+                    ) : (
+                      <ChevronRight className="inline-block w-4 h-4" />
+                    )}
+                  </td>
+                  <td className="py-2 px-4 border-b">{item.id}</td>
+                  <td className="py-2 px-4 border-b truncate">{item.name}</td>
+                  <td className="py-2 px-4 border-b truncate">
+                    {item.ip_address}
+                  </td>
+                  <td className="py-2 px-4 border-b truncate">{item.config}</td>
+                  <td className="py-2 px-4 border-b truncate">
+                    {item.location}
+                  </td>
+                </tr>
+                {expandedRow === item.id && (
+                  <tr>
+                    <td colSpan="6" className="bg-gray-50 px-4 py-4">
+                      <div className="flex justify-between items-start">
+                        <div className="space-y-2">
+                          <h3 className="font-semibold mb-4">
+                            Thông tin chi tiết
+                          </h3>
+                          <div className="space-y-2">
+                            <p>
+                              <span className="font-medium">Tên thư viện:</span>{" "}
+                              {item.lib_name}
+                            </p>
+                            <p>
+                              <span className="font-medium">Tag Input:</span>{" "}
+                              {item.tag_input}
+                            </p>
+                            <p>
+                              <span className="font-medium">Tag Output:</span>{" "}
+                              {item.tag_output}
+                            </p>
+                            <p>
+                              <span className="font-medium">Tag Value:</span>{" "}
+                              {item.tag_value}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="flex space-x-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEdit(item);
+                            }}
+                            className="bg-blue-500 text-white px-2 py-1 rounded text-sm hover:bg-blue-600 flex items-center"
+                          >
+                            <Pencil className="w-3 h-3 mr-1" /> Sửa
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDelete(item.id);
+                            }}
+                            className="bg-red-500 text-white px-2 py-1 rounded text-sm hover:bg-red-600 flex items-center"
+                          >
+                            <Trash2 className="w-3 h-3 mr-1" /> Xóa
+                          </button>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+              </React.Fragment>
             ))}
             {currentItems.length < itemsPerPage &&
               Array.from({ length: itemsPerPage - currentItems.length }).map(
                 (_, index) => (
                   <tr key={`empty-${index}`}>
-                    <td className="py-2 px-4 border-b" colSpan="4">
+                    <td className="py-2 px-4 border-b" colSpan="6">
                       &nbsp;
                     </td>
                   </tr>
