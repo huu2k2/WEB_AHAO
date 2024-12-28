@@ -10,7 +10,7 @@ const Role = lazy(() => import("./Main/Role"));
 const Account = lazy(() => import("./Main/Account"));
 
 const RouterHome = {
-  path: "/",
+  path: "/deviceId/:deviceId",
   element: (
     <LazyWrapper>
       <Page />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Page_Login = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +10,7 @@ const Page_Login = () => {
     e.preventDefault();
     if (email === "admin") {
       if (password == "admin") {
-        navigate("/monitor");
+        navigate("/devices");
       }
     }
   };
@@ -83,9 +83,9 @@ const Page_Login = () => {
         </form>
 
         <div className="mt-6 text-center">
-          <a href="#" className="text-sm text-indigo-600 hover:underline">
+          <Link to={'/'} className="text-sm text-indigo-600 hover:underline">
             Quên mật khẩu
-          </a>
+          </Link>
         </div>
       </div>
     </div>
