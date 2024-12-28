@@ -20,6 +20,8 @@ class newPLC:
           reading = sefl.client.db_read(db_number, start_offset, 1) # (db_number, start offset, read 1 byte)
           snap7.util.set_bool(reading, 0, bit_offset, value)   # (value 1= true;0=false) (bytearray_: bytearray, byte_index: int, bool_index: int, value: bool)
           sefl.client.db_write(db_number, start_offset, reading)       #  write back the bytearray and now the boolean value is changed in the PLC.
+          # TODO: add function write infomation 
+          # 
           return True
         except:
           return False

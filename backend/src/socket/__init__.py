@@ -10,6 +10,7 @@ from ..device import newPLC
 plc_instance = newPLC()
 
 def runsocket(sock):
+    # plc_device_monitoring = PLCDeviceMonitoring(plc_instance)
     plc1_auto(sock, plc_instance)
     plc1_manual(sock, plc_instance)
     plc1_pump1Off(sock, plc_instance)
