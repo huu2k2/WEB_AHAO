@@ -1,10 +1,4 @@
 import json
-import time
-import random
-
-from ..device import newPLC
-
-from .urlPLCs import plc1
 
 def plc1_auto(sock,plc_instance):
     @sock.route('/PLC1/Auto')

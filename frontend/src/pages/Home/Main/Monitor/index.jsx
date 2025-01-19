@@ -85,7 +85,7 @@ const index = () => {
         <FlowMeter flow={data.Flow}></FlowMeter>
       </div>
       <div className="w-[90%] flex justify-between items-center h-[400px] gap-4">
-        <Tank waterLevel={0} />
+        <Tank waterLevel={data.Tank} />
         <div className="flex space-x-16  bg-white shadow-md rounded-lg p-10 w-[70%] h-full">
           {Pumps.map((i, index) => (
             <Pump

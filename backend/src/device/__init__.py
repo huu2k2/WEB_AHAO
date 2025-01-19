@@ -13,6 +13,7 @@ class newPLC:
             sefl.client.connect(ip_addr, rack, slot)
             sefl.isconnect = sefl.client.get_connected()
         except:
+            sefl.client.disconnect()
             sefl.isconnect = False
 
     def writeBool(sefl, db_number, start_offset, bit_offset, value): # 1 = true | 0 = false
@@ -35,9 +36,18 @@ class newPLC:
         except:
            return None
 
-    def readMemory(sefl, start_address,length):
+    def readDB(sefl, db_number, start_address, length):
         try:
-            reading = sefl.client.read_area(snap7.types.Areas.MK, 0, start_address, length)
+            reading = sefl.client.db_read(db_number, start_address, length)
+            value = struct.unpack('>f', reading)[0] # big-endian
+            #print('Start Address: ' + str(start_address) + ' Value: ' + str(reading))
+            return value
+        except:
+            return None
+        
+    def readMemory(sefl, db_addr, start_address, length):
+        try:
+            reading = sefl.client.read_area(snap7.types.Areas.MK, db_addr, start_address, length)
             value = struct.unpack('>f', reading)  # big-endian
             print('Start Address: ' + str(start_address) + ' Value: ' + str(value))
             return value
@@ -52,11 +62,16 @@ class newPLC:
         except:
             return None
 
-# if __name__ == "__main__":
-#     plc = newPLC("192.168.2.35", 0, 0)
-#     plc.connect()
-#     if plc.isconnect:
-#         plc.writeBool(8, 0, 0, 0)
+#if __name__ == "__main__":
+#    plc = newPLC()
+#    while True:        
+#        if plc.isconnect:
+#            data = plc.readDB(7, 0, 4)
+#            print('Read PLC db 7: ', data)
+#        else:
+#            print('Process connect PLC: ')
+#            plc.connect("172.25.58.135", 0, 0)
+#        time.sleep(1)
 #         plc.readBool(7, 0, 1)
         # plc.writeMemory(start_address, length, 786.78)
         # plc.readMemory(start_address, length)

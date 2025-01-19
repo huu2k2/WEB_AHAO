@@ -14,7 +14,7 @@ export const FlowMeter = ({ flow }) => {
           </div>
           <div className="ml-6 space-y-4">
             <div className="bg-gray-100 p-2 rounded-lg shadow-sm text-lg">
-              {flow} kw/h
+              {flow} m3/h
             </div>
           </div>
         </div>

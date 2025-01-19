@@ -14,10 +14,10 @@ export const PumpMeter = ({ tpump1, tpump2 }) => {
           </div>
           <div className="ml-6 space-y-4">
             <div className="bg-gray-100 p-2 rounded-lg shadow-sm text-lg">
-              Bơm 1: {tpump1} h
+              Bơm 1: {tpump1} phút
             </div>
             <div className="bg-gray-100 p-2 rounded-lg shadow-sm text-lg">
-              Bơm 2: {tpump2} h
+              Bơm 2: {tpump2} phút
             </div>
           </div>
         </div>

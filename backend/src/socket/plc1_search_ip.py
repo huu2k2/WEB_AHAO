@@ -1,7 +1,4 @@
 import json
-import random
-from ..device import newPLC
-from .urlPLCs import plc1
 
 def pcl1_search_ip(sock, plc_instance):
     @sock.route('/PLC1/SearchIP')
